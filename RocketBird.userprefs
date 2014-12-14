@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/OneBird.cs">
+    <Files>
+      <File FileName="Assets/Scripts/mainLayer.cs" Line="130" Column="96" />
+      <File FileName="Assets/Scripts/OneBird.cs" Line="55" Column="53" />
+      <File FileName="Assets/Scripts/TryAgain.cs" Line="15" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
