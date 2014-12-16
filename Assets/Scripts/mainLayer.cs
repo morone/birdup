@@ -27,25 +27,25 @@ public class mainLayer : MonoBehaviour {
 		float chance = Random.Range (1.0f, 10.0f);
 
 		if (chance >=9.88 ){
-			float timeToLive;
+			//float timeToLive;
 			float z = Random.Range (0.3f, 7.5f);
 			GameObject newCloud = (GameObject) Instantiate (cloud, new Vector3 (Random.Range(-3.3f, 3.3f), cam.transform.position.y + 20, z), Quaternion.identity);
 
 			string Layer;
 
 			if (z >= 0.3 && z <= 5.14) {
-				timeToLive = 5.0f;
+				//timeToLive = 5.0f;
 				Layer =  "Layer1";
 			}else if( z> 5.14 && z <= 6.1){
-				timeToLive = 10.0f;
+				//timeToLive = 10.0f;
 				Layer =  "Layer2";
 			}else{
-				timeToLive = 40.0f;
+				//timeToLive = 40.0f;
 				Layer = "Layer3";
 			}
 
 			newCloud.transform.parent = GameObject.Find (Layer).transform;	
-			Destroy (newCloud.gameObject, timeToLive);
+			//Destroy (newCloud.gameObject, timeToLive);
 		}
 	}
 
@@ -53,9 +53,6 @@ public class mainLayer : MonoBehaviour {
 		float chance = Random.Range (1.0f, 10.0f);
 		if (chance >= 9.9) {//if (chance >= 9.97) {
 
-
-			//The prefab is delete after T seconds.
-			float timeToLive = 10.0f;
 
 			//Instatiate a new parrot
 			GameObject newEnemy;
@@ -74,7 +71,7 @@ public class mainLayer : MonoBehaviour {
 
 			newEnemy = (GameObject) Instantiate (parrot, new Vector3 (x, cam.transform.position.y + Random.Range (-2.0f, 10.0f), 3), Quaternion.identity);
 			newEnemy.transform.parent = GameObject.Find ("Enemies").transform;
-			Destroy (newEnemy.gameObject, timeToLive);
+
 		}
 
 	}
@@ -98,7 +95,7 @@ public class mainLayer : MonoBehaviour {
 						if (oneBird.GetStatus () == "flying") {
 								oneBird.SetStatus ("nitro");
 						} else if (oneBird.GetStatus () == "stopped") {
-								oneBird.SetStatus ("flying");
+								oneBird.SetStatus ("nitro");
 						}
 				} else if (Input.GetMouseButtonUp (0)) {
 						oneBird.SetStatus ("flying");
@@ -117,31 +114,22 @@ public class mainLayer : MonoBehaviour {
 				}
 
 
-				if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
+				/*if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
 
 					SetGameOver();	
-				}
+				}*/
 		}
 	}
 
 	void SetGameOver(){
 		if (oneBird.GetStatus () != "dead") {
 			Instantiate (gameOver, new Vector3 (0, cam.transform.position.y, 2), Quaternion.identity);
-			Instantiate (tryagain, new Vector3 (0, cam.transform.position.y-1, 3), Quaternion.identity);
+			Instantiate (tryagain, new Vector3 (0, cam.transform.position.y-1, 2), Quaternion.identity);
 			oneBird.SetStatus ("dead");
+			//Time.timeScale = 0;
 		}
 	}
-
-	/*void OnGUI () {
-		if (oneBird.GetStatus() == "dead") {
-			Debug.Log("morto");
-			// Make the first button. If it is pressed, Application.Loadlevel (1) will be executed
-			if (GUI.Button (new Rect (20, 40, 80, 20), "Retry")) {
-					Application.LoadLevel ("InGame");
-			}
-		}
-
-	}*/
 	
+
 
 }

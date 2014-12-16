@@ -34,11 +34,21 @@ public class Parrot : MonoBehaviour {
 					transform.Translate (-0.11f, 0.1f, 0);
 			}
 		}
+
+	
+		CheckPosision ();
+
+
 	}
 
-	/*void CheckPosition(){
-		if ((transform.position.x < cam.transform.position.x - 2.6f)||(transform.position.x > cam.transform.position.x + 2.6f)) {
-			Destroy(this.gameObject);
+	void CheckPosision(){
+		if (_direction == true) {
+			if (transform.position.x > 7)
+				Destroy (this.gameObject);
+		} else {
+			if (transform.position.x < -7)
+				Destroy (this.gameObject);
 		}
-	}*/
+	}
+
 }

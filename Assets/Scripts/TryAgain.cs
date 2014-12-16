@@ -10,9 +10,18 @@ public class TryAgain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0))
-			Application.LoadLevel("InGame");
 
+	}
+
+	void OnMouseOver(){
+		if (Input.GetMouseButtonDown (0)){
+			StartCoroutine(MyMethod());
+		}
+	}
+
+	IEnumerator MyMethod() {
+		yield return new WaitForSeconds(0.2f);
+		Application.LoadLevel("InGame");
 	}
 
 }
