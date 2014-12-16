@@ -114,10 +114,10 @@ public class mainLayer : MonoBehaviour {
 				}
 
 
-				/*if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
+				if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
 
 					SetGameOver();	
-				}*/
+				}
 		}
 	}
 
@@ -126,7 +126,6 @@ public class mainLayer : MonoBehaviour {
 			Instantiate (gameOver, new Vector3 (0, cam.transform.position.y, 2), Quaternion.identity);
 			Instantiate (tryagain, new Vector3 (0, cam.transform.position.y-1, 2), Quaternion.identity);
 			oneBird.SetStatus ("dead");
-			//Time.timeScale = 0;
 		}
 	}
 	
