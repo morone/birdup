@@ -37,6 +37,7 @@
 -define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
 -define:DEVELOPMENT_BUILD
 -define:ENABLE_PROFILER
+'Assets/Scripts/Cloud.cs'
 'Assets/Scripts/GameControl.cs'
 'Assets/Scripts/MovingCamera.cs'
 'Assets/Scripts/OneBird.cs'
