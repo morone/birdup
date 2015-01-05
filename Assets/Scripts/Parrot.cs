@@ -5,7 +5,6 @@ public class Parrot : MonoBehaviour {
 
 	private OneBird oneBird;
 	private bool _direction;
-	//private tk2dCamera cam;
 
 
 	// Use this for initialization
@@ -24,7 +23,6 @@ public class Parrot : MonoBehaviour {
 	}
 
 
-	
 	// Update is called once per frame
 	void Update () {
 		if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {

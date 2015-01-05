@@ -6,7 +6,6 @@ public class OneBird : MonoBehaviour {
 	public Vector3 speed;
 	private float _nitro = 0;
 	private string _status = "stopped";
-	private Vector3 _posisition;	
 	private tk2dCamera mainCamera;
 	public GameObject gameOver;
 	public GameObject tryagain;
@@ -37,8 +36,6 @@ public class OneBird : MonoBehaviour {
 		} else if (_status == "nitro") {
 			_nitro = 3;
 			animator.Play ("OneBirdNitro");
-		} else if (_status == "dead") {
-			transform.position = _posisition;	
 		}
 
 		if ((_status != "stopped")&&(_status != "dead")) {
@@ -48,12 +45,13 @@ public class OneBird : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision){
-		if (collision.gameObject.tag == "Enemy") {
+		if ((collision.gameObject.tag == "Enemy") && (_status != "dead")) {
 			_status = "dead";
 			animator.Play("OneBirdDead");
 			Instantiate(gameOver, new Vector3 (0, mainCamera.transform.position.y, 2), Quaternion.identity);
 			Instantiate (tryagain, new Vector3 (0, mainCamera.transform.position.y-1, 2), Quaternion.identity);
-			_posisition = transform.position;
+			this.rigidbody.constraints =  RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+			collision.gameObject.rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 		}
 
 	}
