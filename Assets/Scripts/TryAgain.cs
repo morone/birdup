@@ -15,12 +15,13 @@ public class TryAgain : MonoBehaviour {
 
 	void OnMouseOver(){
 		if (Input.GetMouseButtonDown (0)){
+			this.audio.Play();
 			StartCoroutine(MyMethod());
 		}
 	}
 
 	IEnumerator MyMethod() {
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSeconds(1.5f);
 		Application.LoadLevel("InGame");
 	}
 

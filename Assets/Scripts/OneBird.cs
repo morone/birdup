@@ -10,6 +10,12 @@ public class OneBird : MonoBehaviour {
 	public GameObject gameOver;
 	public GameObject tryagain;
 
+	private tk2dTextMesh scoreTxt;
+
+
+	private AudioSource _inGameMusic;
+	private AudioSource _gameOverMusic;
+
 	tk2dSpriteAnimator animator;
 
 	// Use this for initialization
@@ -17,6 +23,11 @@ public class OneBird : MonoBehaviour {
 		animator = GetComponent<tk2dSpriteAnimator> ();
 		mainCamera = GameObject.Find ("tk2dCamera").GetComponent<tk2dCamera> ();
 		_status = "stopped";
+
+		scoreTxt = GameObject.Find ("Score").GetComponent<tk2dTextMesh> ();
+
+		_inGameMusic = GameObject.Find ("InGameMusic").GetComponent<AudioSource> ();
+		_gameOverMusic = GameObject.Find ("GameOverMusic").GetComponent<AudioSource> ();
 	}
 
 	public string GetStatus(){
@@ -48,12 +59,35 @@ public class OneBird : MonoBehaviour {
 		if ((collision.gameObject.tag == "Enemy") && (_status != "dead")) {
 			_status = "dead";
 			animator.Play("OneBirdDead");
+
+			_inGameMusic.audio.Stop();
+			_gameOverMusic.audio.Play ();
+
+			scoreTxt.transform.localScale = new Vector3(2.0f,2.0f,2.0f);
+			scoreTxt.anchor = TextAnchor.MiddleCenter;
+			scoreTxt.transform.position = new Vector3(0f, mainCamera.transform.position.y+1.3f, 0.33f);
+
+
+
 			Instantiate(gameOver, new Vector3 (0, mainCamera.transform.position.y, 2), Quaternion.identity);
-			Instantiate (tryagain, new Vector3 (0, mainCamera.transform.position.y-1, 2), Quaternion.identity);
+
+
+			StartCoroutine(ShowTryAgain());
+
+			if(this.audio.isPlaying){
+				this.audio.Stop ();
+			}
+
 			this.rigidbody.constraints =  RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 			collision.gameObject.rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 		}
 
+	}
+
+
+	IEnumerator ShowTryAgain () {
+		yield return new WaitForSeconds(5.0f);
+		Instantiate (tryagain, new Vector3 (0, mainCamera.transform.position.y-1, 2), Quaternion.identity);
 	}
 
 
