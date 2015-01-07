@@ -103,7 +103,7 @@ public class mainLayer : MonoBehaviour {
 
 				if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
 						GenerateCloud ();
-						//GenerateParrot ();
+						GenerateParrot ();
 						transform.Translate (oneBird.speed * Time.deltaTime);
 				}
 

@@ -1,13 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/OneBird.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/mainLayer.cs">
     <Files>
-      <File FileName="Assets/Scripts/OneBird.cs" Line="41" Column="53" />
-      <File FileName="Assets/Scripts/TryAgain.cs" Line="18" Column="31" />
-      <File FileName="Assets/Scripts/mainLayer.cs" Line="128" Column="31" />
-      <File FileName="Assets/Scripts/Parrot.cs" Line="34" Column="4" />
-      <File FileName="Assets/Scripts/Cloud.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/mainLayer.cs" Line="61" Column="84" />
+      <File FileName="Assets/Scripts/OneBird.cs" Line="71" Column="4" />
+      <File FileName="Assets/Scripts/TryAgain.cs" Line="21" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
