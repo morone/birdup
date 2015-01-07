@@ -15,6 +15,7 @@ public class OneBird : MonoBehaviour {
 
 	private AudioSource _inGameMusic;
 	private AudioSource _gameOverMusic;
+	private AudioSource _wingFlap;
 
 	tk2dSpriteAnimator animator;
 
@@ -28,6 +29,7 @@ public class OneBird : MonoBehaviour {
 
 		_inGameMusic = GameObject.Find ("InGameMusic").GetComponent<AudioSource> ();
 		_gameOverMusic = GameObject.Find ("GameOverMusic").GetComponent<AudioSource> ();
+		_wingFlap = GameObject.Find ("WingFlap").GetComponent<AudioSource> ();
 	}
 
 	public string GetStatus(){
@@ -74,8 +76,8 @@ public class OneBird : MonoBehaviour {
 
 			StartCoroutine(ShowTryAgain());
 
-			if(this.audio.isPlaying){
-				this.audio.Stop ();
+			if(_wingFlap.audio.isPlaying){
+				_wingFlap.audio.Stop ();
 			}
 
 			this.rigidbody.constraints =  RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
