@@ -17,6 +17,7 @@ public class mainLayer : MonoBehaviour {
 	private AudioSource _inGameMusic;
 	private AudioSource _gameOverMusic;
 	private AudioSource _windMusic;
+	private AudioSource _wingFlap;
 	
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,7 @@ public class mainLayer : MonoBehaviour {
 		cam = GameObject.Find ("tk2dCamera").GetComponent<tk2dCamera> ();
 		_inGameMusic = GameObject.Find ("InGameMusic").GetComponent<AudioSource> ();
 		_gameOverMusic = GameObject.Find ("GameOverMusic").GetComponent<AudioSource> ();
+		_wingFlap = GameObject.Find ("WingFlap").GetComponent<AudioSource> ();
 	}
 
 
@@ -56,7 +58,7 @@ public class mainLayer : MonoBehaviour {
 
 
 		if ((chance >= 9.9)&&(!GameObject.Find ("WindSound(Clone)"))) {
-			GameObject newWind = (GameObject) Instantiate (wind, new Vector3 (-9.72f, -3.16f, 0.0f), Quaternion.identity);
+			GameObject newWind = (GameObject) Instantiate (wind, new Vector3 (-11.16f, -1.94f, 3.17f), Quaternion.identity);
 			newWind.audio.Play();
 			Destroy (newWind.gameObject, 10);
 		}
@@ -101,7 +103,7 @@ public class mainLayer : MonoBehaviour {
 
 				if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
 						GenerateCloud ();
-						GenerateParrot ();
+						//GenerateParrot ();
 						transform.Translate (oneBird.speed * Time.deltaTime);
 				}
 
@@ -109,14 +111,15 @@ public class mainLayer : MonoBehaviour {
 				if (Input.GetMouseButtonDown (0)) {
 						if (oneBird.GetStatus () == "flying") {
 								oneBird.SetStatus ("nitro");
-								oneBird.audio.Play ();
+								_wingFlap.audio.Play ();
 						} else if (oneBird.GetStatus () == "stopped") {
 								oneBird.SetStatus ("nitro");
+								_wingFlap.audio.Play ();
 								_inGameMusic.audio.Play();
 						}
 				} else if (Input.GetMouseButtonUp (0)) {
 						oneBird.SetStatus ("flying");
-						oneBird.audio.Stop ();
+						_wingFlap.audio.Stop ();
 				}
 
 				if (Input.GetKey ("left")) {
@@ -145,8 +148,8 @@ public class mainLayer : MonoBehaviour {
 			_inGameMusic.audio.Stop();
 			_gameOverMusic.audio.Play ();
 
-			if(oneBird.audio.isPlaying){
-				oneBird.audio.Stop ();
+			if(_wingFlap.audio.isPlaying){
+				_wingFlap.audio.Stop ();
 			}
 
 			scoreTxt.transform.localScale = new Vector3(2.0f,2.0f,2.0f);
