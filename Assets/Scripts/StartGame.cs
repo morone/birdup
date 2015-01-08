@@ -5,6 +5,7 @@ public class StartGame : MonoBehaviour {
 
 	public GameObject _confirm;
 	private tk2dUIManager manager;
+	private bool _started = false;
 
 	// Use this for initialization
 	void Start () {
@@ -14,11 +15,14 @@ public class StartGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonDown (0)){
-			GameObject confirmation = (GameObject) Instantiate (_confirm, new Vector3 (0, 0, 0), Quaternion.identity);
-			confirmation.audio.Play();
-			Destroy (confirmation.gameObject, 2);
+			if(_started == false){
+				_started = true;
+				GameObject confirmation = (GameObject) Instantiate (_confirm, new Vector3 (0, 0, 0), Quaternion.identity);
+				confirmation.audio.Play();
+				Destroy (confirmation.gameObject, 2);
 
-			StartCoroutine(MyMethod());
+				StartCoroutine(MyMethod());
+			}
 		}
 	}
 	

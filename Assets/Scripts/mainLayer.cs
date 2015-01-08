@@ -10,9 +10,11 @@ public class mainLayer : MonoBehaviour {
 
 	public GameObject cloud;
 	public GameObject parrot;
+	public GameObject parrotSound;
 	public GameObject gameOver;
 	public GameObject tryagain;
 	public GameObject wind;
+
 
 	private AudioSource _inGameMusic;
 	private AudioSource _gameOverMusic;
@@ -86,6 +88,9 @@ public class mainLayer : MonoBehaviour {
 
 			newEnemy = (GameObject) Instantiate (parrot, new Vector3 (x, cam.transform.position.y + Random.Range (-2.0f, 10.0f), 3), Quaternion.identity);
 			newEnemy.transform.parent = GameObject.Find ("Enemies").transform;
+
+			GameObject psound = (GameObject) Instantiate (parrotSound, new Vector3 (-11.16f, -1.94f, 3.17f), Quaternion.identity);
+			Destroy (psound.gameObject, 1);
 
 		}
 

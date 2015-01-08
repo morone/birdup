@@ -5,6 +5,8 @@ public class TryAgain : MonoBehaviour {
 
 	private AudioSource _confirm;
 
+	private bool _started = false;
+
 	// Use this for initialization
 	void Start () {
 		_confirm = GameObject.Find ("Confirm").GetComponent<AudioSource> ();
@@ -18,8 +20,11 @@ public class TryAgain : MonoBehaviour {
 
 	void OnMouseOver(){
 		if (Input.GetMouseButtonDown (0)){
-			_confirm.audio.Play();
-			StartCoroutine(MyMethod());
+			if(_started == false){
+				_started = true;
+				_confirm.audio.Play();
+				StartCoroutine(MyMethod());
+			}
 		}
 	}
 
