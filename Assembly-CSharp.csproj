@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\ParallaxLayer.cs" />
      <Compile Include="Assets\Scripts\Parrot.cs" />
      <Compile Include="Assets\Scripts\Sky.cs" />
+     <Compile Include="Assets\Scripts\StartGame.cs" />
      <Compile Include="Assets\Scripts\Sun.cs" />
      <Compile Include="Assets\Scripts\TryAgain.cs" />
      <Compile Include="Assets\Scripts\mainLayer.cs" />

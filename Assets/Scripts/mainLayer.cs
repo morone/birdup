@@ -118,8 +118,10 @@ public class mainLayer : MonoBehaviour {
 								_inGameMusic.audio.Play();
 						}
 				} else if (Input.GetMouseButtonUp (0)) {
-						oneBird.SetStatus ("flying");
-						_wingFlap.audio.Stop ();
+						if (oneBird.GetStatus () != "stopped") {
+								oneBird.SetStatus ("flying");
+								_wingFlap.audio.Stop ();
+						}
 				}
 
 				if (Input.GetKey ("left")) {
