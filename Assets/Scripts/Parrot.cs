@@ -4,8 +4,8 @@ using System.Collections;
 public class Parrot : MonoBehaviour {
 
 	private OneBird oneBird;
-	private bool _direction;
-
+	public bool direction;
+	public GameObject parrotSound;
 
 	// Use this for initialization
 	void Start () {
@@ -13,20 +13,23 @@ public class Parrot : MonoBehaviour {
 		//cam = GameObject.Find ("tk2dCamera").GetComponent<tk2dCamera> ();
 
 		if (transform.position.x < 0) {
-			_direction = true;
+			direction = true;
 		} else {
-			_direction = false;
+			direction = false;
 			Vector3 newScale = transform.localScale;
 			newScale.x *=-1;
 			transform.localScale = newScale;
 		}
+
+		GameObject psound = (GameObject)Instantiate (parrotSound, new Vector3 (-11.16f, -1.94f, 3.17f), Quaternion.identity);
+		Destroy (psound.gameObject, 1);
 	}
 
 
 	// Update is called once per frame
 	void Update () {
 		if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
-			if (_direction == true) {
+			if (direction == true) {
 					transform.Translate (0.11f, 0.1f, 0);
 			} else {
 					transform.Translate (-0.11f, 0.1f, 0);
@@ -40,7 +43,7 @@ public class Parrot : MonoBehaviour {
 	}
 
 	void CheckPosision(){
-		if (_direction == true) {
+		if (direction == true) {
 			if (transform.position.x > 7)
 				Destroy (this.gameObject);
 		} else {

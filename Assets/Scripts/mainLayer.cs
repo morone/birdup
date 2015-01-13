@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class mainLayer : MonoBehaviour {
 
@@ -10,16 +11,19 @@ public class mainLayer : MonoBehaviour {
 
 	public GameObject cloud;
 	public GameObject parrot;
-	public GameObject parrotSound;
+
+	public GameObject evilbird;
 	public GameObject gameOver;
 	public GameObject tryagain;
 	public GameObject wind;
 
+	
+	private int TotalEnemyAmount = 3;
 
-	private AudioSource _inGameMusic;
-	private AudioSource _gameOverMusic;
+	private static AudioSource _inGameMusic;
+	private static AudioSource _gameOverMusic;
 	private AudioSource _windMusic;
-	private AudioSource _wingFlap;
+	private static AudioSource _wingFlap;
 	
 	// Use this for initialization
 	void Start () {
@@ -56,9 +60,6 @@ public class mainLayer : MonoBehaviour {
 
 	private void GenerateWind(){
 		float chance = Random.Range (1.0f, 10.0f);
-
-
-
 		if ((chance >= 9.9)&&(!GameObject.Find ("WindSound(Clone)"))) {
 			GameObject newWind = (GameObject) Instantiate (wind, new Vector3 (-11.16f, -1.94f, 3.17f), Quaternion.identity);
 			newWind.audio.Play();
@@ -66,39 +67,42 @@ public class mainLayer : MonoBehaviour {
 		}
 	}
 
-	private void GenerateParrot(){
-		float chance = Random.Range (1.0f, 10.0f);
-		if (chance >= 9.9) {//if (chance >= 9.97) {
 
 
-			//Instatiate a new parrot
-			GameObject newEnemy;
+	private void GenerateEnemy(GameObject prefab, float chance){
+		float range = Random.Range (1.0f, 10.0f);
+		
+		if (GameObject.FindGameObjectsWithTag("Enemy").Length < TotalEnemyAmount) {
+			if (range >= chance) {
 
-			//Randomize the startup position.
-			int direction = (int)Random.Range (0.0f,1.9f);
+				Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
+				//Instatiate a new enemy
+				GameObject newEnemy;
+				
+				//Randomize the startup position.
+				int direction = (int)Random.Range (0.0f, 1.9f);
+				
+				//If direction is 1, then the enemy appears from the left. Else, from the Right.
+				float x;
+				
+				if (direction == 1) {
+					x = -9.5f;
+				} else {
+					x = 9.5f;
+				}
 
-			//If direction is 1, then the parrot appears from the left. Else, from the Right.
-			float x;
 
-			if(direction==1){
-				x = -9.5f;
-			}else{
-				x = 9.5f;
+				newEnemy = (GameObject)Instantiate (prefab, new Vector3 (x, cam.transform.position.y + Random.Range (-2.0f, 4.0f), 3), Quaternion.identity);
+				newEnemy.transform.parent = GameObject.Find ("Enemies").transform;
 			}
-
-			newEnemy = (GameObject) Instantiate (parrot, new Vector3 (x, cam.transform.position.y + Random.Range (-2.0f, 10.0f), 3), Quaternion.identity);
-			newEnemy.transform.parent = GameObject.Find ("Enemies").transform;
-
-			GameObject psound = (GameObject) Instantiate (parrotSound, new Vector3 (-11.16f, -1.94f, 3.17f), Quaternion.identity);
-			Destroy (psound.gameObject, 1);
-
 		}
 
+	
 	}
+
 
 	// Update is called once per frame
 	void Update () {
-
 
 
 		if (oneBird.GetStatus () != "dead") {
@@ -106,13 +110,9 @@ public class mainLayer : MonoBehaviour {
 				scoreTxt.text = score.ToString () + " pt";
 				GenerateWind ();
 
-				if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
-						GenerateCloud ();
-						GenerateParrot ();
-						transform.Translate (oneBird.speed * Time.deltaTime);
-				}
-
-
+				//Management of the enemy appear and frequency.
+				EnemyManagement();
+				
 				if (Input.GetMouseButtonDown (0)) {
 						if (oneBird.GetStatus () == "flying") {
 								oneBird.SetStatus ("nitro");
@@ -129,6 +129,8 @@ public class mainLayer : MonoBehaviour {
 						}
 				}
 
+				
+				/*** THIS IS FOR PC TEST ONLY BEGIN ***/
 				if (Input.GetKey ("left")) {
 						if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
 								oneBird.transform.Translate (-0.05f, 0, 0);
@@ -140,17 +142,20 @@ public class mainLayer : MonoBehaviour {
 								oneBird.transform.Translate (0.05f, 0, 0);
 						}
 				}
+				/*** THIS IS FOR PC TEST ONLY END ***/
 
 
-				if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
+				/*if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
 
 					SetGameOver();	
-				}
+				}*/
 		}
 	}
 
-	void SetGameOver(){
+	public void SetGameOver(){
 		if (oneBird.GetStatus () != "dead") {
+
+			oneBird.SetStatus ("dead");
 
 			_inGameMusic.audio.Stop();
 			_gameOverMusic.audio.Play ();
@@ -164,11 +169,25 @@ public class mainLayer : MonoBehaviour {
 			scoreTxt.transform.position = new Vector3(0f, cam.transform.position.y+1.3f, 0.33f);
 
 			Instantiate (gameOver, new Vector3 (0, cam.transform.position.y, 2), Quaternion.identity);
-			oneBird.SetStatus ("dead");
 
-	
 			StartCoroutine(ShowTryAgain());
 
+		}
+	}
+
+	private void EnemyManagement(){
+		if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
+			GenerateCloud ();
+			GenerateEnemy(parrot, 9.9f);
+			
+			transform.Translate (oneBird.speed * Time.deltaTime);
+			
+			
+			if (score >=101)
+				GenerateEnemy(evilbird, 9.95f);
+			
+			if (score >=250)
+				TotalEnemyAmount = 7;
 		}
 	}
 	

@@ -17,6 +17,8 @@ public class OneBird : MonoBehaviour {
 	private AudioSource _gameOverMusic;
 	private AudioSource _wingFlap;
 
+	private mainLayer _uiManager;
+
 	tk2dSpriteAnimator animator;
 
 	// Use this for initialization
@@ -30,6 +32,8 @@ public class OneBird : MonoBehaviour {
 		_inGameMusic = GameObject.Find ("InGameMusic").GetComponent<AudioSource> ();
 		_gameOverMusic = GameObject.Find ("GameOverMusic").GetComponent<AudioSource> ();
 		_wingFlap = GameObject.Find ("WingFlap").GetComponent<AudioSource> ();
+
+		_uiManager = GameObject.Find ("tk2dUIManager").GetComponent<mainLayer> ();
 	}
 
 	public string GetStatus(){
@@ -49,6 +53,8 @@ public class OneBird : MonoBehaviour {
 		} else if (_status == "nitro") {
 			_nitro = 3;
 			animator.Play ("OneBirdNitro");
+		} else if (_status == "dead") {
+			animator.Play ("OneBirdDead");
 		}
 
 		if ((_status != "stopped")&&(_status != "dead")) {
@@ -59,7 +65,7 @@ public class OneBird : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		if ((collision.gameObject.tag == "Enemy") && (_status != "dead")) {
-			_status = "dead";
+			/*_status = "dead";
 			animator.Play("OneBirdDead");
 
 			_inGameMusic.audio.Stop();
@@ -73,8 +79,8 @@ public class OneBird : MonoBehaviour {
 
 			Instantiate(gameOver, new Vector3 (0, mainCamera.transform.position.y, 2), Quaternion.identity);
 
-
-			StartCoroutine(ShowTryAgain());
+	
+			StartCoroutine(ShowTryAgain());*/
 
 			if(_wingFlap.audio.isPlaying){
 				_wingFlap.audio.Stop ();
@@ -82,6 +88,9 @@ public class OneBird : MonoBehaviour {
 
 			this.rigidbody.constraints =  RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 			collision.gameObject.rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+
+			_uiManager.SetGameOver();
+
 		}
 
 	}
