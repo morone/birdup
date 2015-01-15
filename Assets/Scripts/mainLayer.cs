@@ -20,10 +20,10 @@ public class mainLayer : MonoBehaviour {
 	
 	private int TotalEnemyAmount = 3;
 
-	private static AudioSource _inGameMusic;
-	private static AudioSource _gameOverMusic;
+	private AudioSource _inGameMusic;
+	private AudioSource _gameOverMusic;
 	private AudioSource _windMusic;
-	private static AudioSource _wingFlap;
+	private AudioSource _wingFlap;
 	
 	// Use this for initialization
 	void Start () {
@@ -75,7 +75,6 @@ public class mainLayer : MonoBehaviour {
 		if (GameObject.FindGameObjectsWithTag("Enemy").Length < TotalEnemyAmount) {
 			if (range >= chance) {
 
-				Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
 				//Instatiate a new enemy
 				GameObject newEnemy;
 				
@@ -145,10 +144,12 @@ public class mainLayer : MonoBehaviour {
 				/*** THIS IS FOR PC TEST ONLY END ***/
 
 
-				/*if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
+				if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
 
-					SetGameOver();	
-				}*/
+					//SetGameOver();	
+
+					GameControl.SetGameOver();
+				}
 		}
 	}
 
