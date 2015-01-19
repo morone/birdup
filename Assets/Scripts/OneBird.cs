@@ -10,14 +10,7 @@ public class OneBird : MonoBehaviour {
 	public GameObject gameOver;
 	public GameObject tryagain;
 
-	private tk2dTextMesh scoreTxt;
 
-
-	private AudioSource _inGameMusic;
-	private AudioSource _gameOverMusic;
-	private AudioSource _wingFlap;
-
-	private mainLayer _uiManager;
 
 	tk2dSpriteAnimator animator;
 
@@ -27,13 +20,6 @@ public class OneBird : MonoBehaviour {
 		mainCamera = GameObject.Find ("tk2dCamera").GetComponent<tk2dCamera> ();
 		_status = "stopped";
 
-		scoreTxt = GameObject.Find ("Score").GetComponent<tk2dTextMesh> ();
-
-		_inGameMusic = GameObject.Find ("InGameMusic").GetComponent<AudioSource> ();
-		_gameOverMusic = GameObject.Find ("GameOverMusic").GetComponent<AudioSource> ();
-		_wingFlap = GameObject.Find ("WingFlap").GetComponent<AudioSource> ();
-
-		_uiManager = GameObject.Find ("tk2dUIManager").GetComponent<mainLayer> ();
 	}
 
 	public string GetStatus(){
@@ -53,9 +39,7 @@ public class OneBird : MonoBehaviour {
 		} else if (_status == "nitro") {
 			_nitro = 3;
 			animator.Play ("OneBirdNitro");
-		} else if (_status == "dead") {
-			animator.Play ("OneBirdDead");
-		}
+		} 
 
 		if ((_status != "stopped")&&(_status != "dead")) {
 			transform.Translate (Input.acceleration.x, (speed.y + _nitro) * Time.deltaTime, 0);
@@ -65,40 +49,13 @@ public class OneBird : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		if ((collision.gameObject.tag == "Enemy") && (_status != "dead")) {
-			/*_status = "dead";
-			animator.Play("OneBirdDead");
-
-			_inGameMusic.audio.Stop();
-			_gameOverMusic.audio.Play ();
-
-			scoreTxt.transform.localScale = new Vector3(2.0f,2.0f,2.0f);
-			scoreTxt.anchor = TextAnchor.MiddleCenter;
-			scoreTxt.transform.position = new Vector3(0f, mainCamera.transform.position.y+1.3f, 0.33f);
-
-
-
-			Instantiate(gameOver, new Vector3 (0, mainCamera.transform.position.y, 2), Quaternion.identity);
-
-	
-			StartCoroutine(ShowTryAgain());*/
-
-			if(_wingFlap.audio.isPlaying){
-				_wingFlap.audio.Stop ();
-			}
-
+			animator.Play ("OneBirdDead");
 			this.rigidbody.constraints =  RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 			collision.gameObject.rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-
-			_uiManager.SetGameOver();
-
+			GameControl.SetGameOver();
+			StartCoroutine(GameControl.ShowTryAgain());
 		}
 
-	}
-
-
-	IEnumerator ShowTryAgain () {
-		yield return new WaitForSeconds(5.0f);
-		Instantiate (tryagain, new Vector3 (0, mainCamera.transform.position.y-1, 2), Quaternion.identity);
 	}
 
 

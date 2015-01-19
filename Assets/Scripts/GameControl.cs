@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public static class GameControl {
+public static class GameControl  {
 
 	public static OneBird oneBird;
 	public static AudioSource _inGameMusic;
@@ -10,7 +11,8 @@ public static class GameControl {
 	public static tk2dTextMesh scoreTxt;
 	public static tk2dCamera cam;
 	public static tk2dUIManager uimanager;
-	
+
+	public static GameObject GameOver;
 
 	public static void SetGameOver(){
 		oneBird = GameObject.Find ("OneBird").GetComponent<OneBird> ();
@@ -31,15 +33,19 @@ public static class GameControl {
 			if(_wingFlap.audio.isPlaying){
 				_wingFlap.audio.Stop ();
 			}
-			
+
+
 			scoreTxt.transform.localScale = new Vector3(2.0f,2.0f,2.0f);
 			scoreTxt.anchor = TextAnchor.MiddleCenter;
 			scoreTxt.transform.position = new Vector3(0f, cam.transform.position.y+1.3f, 0.33f);
-			
-			uimanager.Instantiate (gameOver, new Vector3 (0, cam.transform.position.y, 2), Quaternion.identity);
-			
-			uimanager.Instantiate (tryagain, new Vector3 (0, cam.transform.position.y-1, 2), Quaternion.identity);
-			
+
+			MonoBehaviour.Instantiate(Resources.Load ("GameOver", typeof(GameObject)), new Vector3 (0, cam.transform.position.y, 2), Quaternion.identity);
 		}
+	}
+
+
+	public static IEnumerator ShowTryAgain () {
+		yield return new WaitForSeconds(5.0f);
+		MonoBehaviour.Instantiate(Resources.Load ("TryAgain", typeof(GameObject)), new Vector3 (0, cam.transform.position.y-1, 2), Quaternion.identity);
 	}
 }

@@ -21,7 +21,7 @@ public class mainLayer : MonoBehaviour {
 	private int TotalEnemyAmount = 3;
 
 	private AudioSource _inGameMusic;
-	private AudioSource _gameOverMusic;
+
 	private AudioSource _windMusic;
 	private AudioSource _wingFlap;
 	
@@ -31,10 +31,10 @@ public class mainLayer : MonoBehaviour {
 		scoreTxt = GameObject.Find ("Score").GetComponent<tk2dTextMesh> ();
 		cam = GameObject.Find ("tk2dCamera").GetComponent<tk2dCamera> ();
 		_inGameMusic = GameObject.Find ("InGameMusic").GetComponent<AudioSource> ();
-		_gameOverMusic = GameObject.Find ("GameOverMusic").GetComponent<AudioSource> ();
+
 		_wingFlap = GameObject.Find ("WingFlap").GetComponent<AudioSource> ();
 	}
-
+	
 
 	private void GenerateCloud(){
 
@@ -145,36 +145,13 @@ public class mainLayer : MonoBehaviour {
 
 
 				if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
-
-					//SetGameOver();	
-
 					GameControl.SetGameOver();
+					StartCoroutine(GameControl.ShowTryAgain());
 				}
 		}
 	}
 
-	public void SetGameOver(){
-		if (oneBird.GetStatus () != "dead") {
 
-			oneBird.SetStatus ("dead");
-
-			_inGameMusic.audio.Stop();
-			_gameOverMusic.audio.Play ();
-
-			if(_wingFlap.audio.isPlaying){
-				_wingFlap.audio.Stop ();
-			}
-
-			scoreTxt.transform.localScale = new Vector3(2.0f,2.0f,2.0f);
-			scoreTxt.anchor = TextAnchor.MiddleCenter;
-			scoreTxt.transform.position = new Vector3(0f, cam.transform.position.y+1.3f, 0.33f);
-
-			Instantiate (gameOver, new Vector3 (0, cam.transform.position.y, 2), Quaternion.identity);
-
-			StartCoroutine(ShowTryAgain());
-
-		}
-	}
 
 	private void EnemyManagement(){
 		if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
@@ -191,10 +168,6 @@ public class mainLayer : MonoBehaviour {
 				TotalEnemyAmount = 7;
 		}
 	}
-	
-	IEnumerator ShowTryAgain () {
-		yield return new WaitForSeconds(5.0f);
-		Instantiate (tryagain, new Vector3 (0, cam.transform.position.y-1, 2), Quaternion.identity);
-	}
+
 
 }
