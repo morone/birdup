@@ -5,7 +5,7 @@ public class EvilBird : MonoBehaviour {
 
 	private OneBird oneBird;
 	public bool direction;
-
+	public GameObject EvilBirdSound;
 
 	public float CurveSpeed = 5;
 	public float MoveSpeed = 1;
@@ -16,7 +16,8 @@ public class EvilBird : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		oneBird = GameObject.Find ("OneBird").GetComponent<OneBird> ();
-
+		GameObject psound = (GameObject)Instantiate (EvilBirdSound, new Vector3 (-11.16f, -1.94f, 3.17f), Quaternion.identity);
+		Destroy (psound.gameObject, 1);
 
 
 		if (transform.position.x < 0) {
