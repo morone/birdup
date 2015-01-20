@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Mexican.cs" />
      <Compile Include="Assets\Scripts\MovingCamera.cs" />
      <Compile Include="Assets\Scripts\OneBird.cs" />
+     <Compile Include="Assets\Scripts\ParallaxLayer.cs" />
      <Compile Include="Assets\Scripts\Parrot.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
      <Compile Include="Assets\Scripts\TryAgain.cs" />
@@ -136,6 +137,7 @@
      <Compile Include="Assets\TK2DROOT\tk2d_demo\tk2dDemoCameraController.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d_demo\tk2dDemoReloadController.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d_demo\tk2dDemoRuntimeSpriteController.cs" />
+     <Compile Include="Assets\Wire.cs" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\SolidVertexColor.shader" />

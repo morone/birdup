@@ -31,6 +31,8 @@ public class mainLayer : MonoBehaviour {
 		oneBird = GameObject.Find ("OneBird").GetComponent<OneBird> ();
 		scoreTxt = GameObject.Find ("Score").GetComponent<tk2dTextMesh> ();
 		cam = GameObject.Find ("tk2dCamera").GetComponent<tk2dCamera> ();
+
+
 		_inGameMusic = GameObject.Find ("InGameMusic").GetComponent<AudioSource> ();
 
 		_wingFlap = GameObject.Find ("WingFlap").GetComponent<AudioSource> ();
@@ -105,10 +107,13 @@ public class mainLayer : MonoBehaviour {
 	void Update () {
 
 
+
+
 		if (oneBird.GetStatus () != "dead") {
 				score = (int)cam.transform.position.y;
 				scoreTxt.text = score.ToString () + " pt";
 				GenerateWind ();
+
 
 				//Management of the enemy appear and frequency.
 				EnemyManagement();
