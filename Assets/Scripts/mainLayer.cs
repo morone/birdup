@@ -146,8 +146,8 @@ public class mainLayer : MonoBehaviour {
 
 
 				if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
-					GameControl.SetGameOver();
-					StartCoroutine(GameControl.ShowTryAgain());
+					//GameControl.SetGameOver();
+					//StartCoroutine(GameControl.ShowTryAgain());
 				}
 		}
 	}

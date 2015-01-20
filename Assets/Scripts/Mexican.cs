@@ -15,9 +15,6 @@ public class Mexican : MonoBehaviour {
 			direction = true;
 		} else {
 			direction = false;
-			Vector3 newScale = transform.localScale;
-			newScale.x *=-1;
-			transform.localScale = newScale;
 		}
 		
 		GameObject psound = (GameObject)Instantiate (MexicanSound, new Vector3 (-11.16f, -1.94f, 3.17f), Quaternion.identity);
