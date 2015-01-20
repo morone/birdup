@@ -10,7 +10,6 @@ public class Parrot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		oneBird = GameObject.Find ("OneBird").GetComponent<OneBird> ();
-		//cam = GameObject.Find ("tk2dCamera").GetComponent<tk2dCamera> ();
 
 		if (transform.position.x < 0) {
 			direction = true;

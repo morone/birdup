@@ -11,8 +11,9 @@ public class mainLayer : MonoBehaviour {
 
 	public GameObject cloud;
 	public GameObject parrot;
-
 	public GameObject evilbird;
+	public GameObject mexican;
+
 	public GameObject gameOver;
 	public GameObject tryagain;
 	public GameObject wind;
@@ -129,19 +130,19 @@ public class mainLayer : MonoBehaviour {
 				}
 
 				
-				/*** THIS IS FOR PC TEST ONLY BEGIN ***/
-				if (Input.GetKey ("left")) {
-						if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
-								oneBird.transform.Translate (-0.05f, 0, 0);
-						}
-
-				}
-				if (Input.GetKey ("right")) {
-						if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
-								oneBird.transform.Translate (0.05f, 0, 0);
-						}
-				}
-				/*** THIS IS FOR PC TEST ONLY END ***/
+				/*** THIS IS FOR PC TEST ONLY <BEGIN> ***/
+				/***/if (Input.GetKey ("left")) {
+				/***/		if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
+				/***/				oneBird.transform.Translate (-0.05f, 0, 0);
+				/***/		}
+				/***/
+				/***/}
+				/***/if (Input.GetKey ("right")) {
+				/***/		if ((oneBird.GetStatus () == "flying") || (oneBird.GetStatus () == "nitro")) {
+				/***/				oneBird.transform.Translate (0.05f, 0, 0);
+				/***/		}
+				/***/}
+				/*** THIS IS FOR PC TEST ONLY <END> ***/
 
 
 				if (oneBird.transform.position.y <= cam.transform.position.y - 7) {
@@ -165,6 +166,8 @@ public class mainLayer : MonoBehaviour {
 				GenerateEnemy(evilbird, 9.95f);
 			
 			if (score >=250)
+				if(!GameObject.Find ("MexicanSound(Clone)"))
+					GenerateEnemy(mexican, 9.9f);
 				TotalEnemyAmount = 7;
 		}
 	}

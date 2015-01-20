@@ -13,6 +13,7 @@ public static class GameControl  {
 	public static tk2dUIManager uimanager;
 
 	public static GameObject GameOver;
+	public static GameObject MexicanSound;
 
 	public static void SetGameOver(){
 		oneBird = GameObject.Find ("OneBird").GetComponent<OneBird> ();
@@ -34,6 +35,8 @@ public static class GameControl  {
 				_wingFlap.audio.Stop ();
 			}
 
+			if(MexicanSound = GameObject.Find ("MexicanSound(Clone)"))
+				MexicanSound.audio.Stop ();
 
 			scoreTxt.transform.localScale = new Vector3(2.0f,2.0f,2.0f);
 			scoreTxt.anchor = TextAnchor.MiddleCenter;

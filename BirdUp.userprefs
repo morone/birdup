@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/mainLayer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EvilBird.cs">
     <Files>
-      <File FileName="Assets/Scripts/mainLayer.cs" Line="35" Column="73" />
+      <File FileName="Assets/Scripts/EvilBird.cs" Line="19" Column="61" />
+      <File FileName="Assets/Scripts/Parrot.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
