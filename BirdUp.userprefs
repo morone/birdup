@@ -1,11 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/mainLayer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/iAd.cs">
     <Files>
-      <File FileName="Assets/Scripts/Mexican.cs" Line="32" Column="4" />
-      <File FileName="Assets/Scripts/mainLayer.cs" Line="119" Column="5" />
-      <File FileName="Assets/Scripts/EvilBird.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MovingCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets/iAd.cs" Line="12" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Parrot.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
      <Compile Include="Assets\Scripts\TryAgain.cs" />
+     <Compile Include="Assets\Scripts\iAd.cs" />
      <Compile Include="Assets\Scripts\mainLayer.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCamera.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCameraAnchor.cs" />
